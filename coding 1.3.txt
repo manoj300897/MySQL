@@ -1,0 +1,24 @@
+1.get details of products from puma brand
+
+mysql> insert into e_commerce values('blackshirt','clothing',900,'puma',4.8);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from e_commerce;
++------------+----------+-------+-------+--------+
+| name       | category | price | brand | rating |
++------------+----------+-------+-------+--------+
+| blackshirt | clothing |   900 | puma  |    4.8 |
++------------+----------+-------+-------+--------+
+
+2.user would like to shop for jeans.help user name end with jeans
+
+ select * from e_commerce where name like '%jeans';
++-------------+----------+-------+-------+--------+
+| name        | category | price | brand | rating |
++-------------+----------+-------+-------+--------+
+| blue jeans  | clothing |   800 | denim |    3.6 |
+| black jeans | clothing |   750 | denim |    4.5 |
++-------------+----------+-------+-------+--------+
+
+3.user wants to purchase "bourbon small","bourbon with extra cookies" or products
+from bourbon.

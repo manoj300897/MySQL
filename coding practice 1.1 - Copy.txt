@@ -1,0 +1,33 @@
+1.create a student table  to store name,age and score of students.
+ 
+> create table students(name varchar(200),age int,score int);
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> desc students;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| name  | varchar(200) | YES  |     | NULL    |       |
+| age   | int          | YES  |     | NULL    |       |
+| score | int          | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+2.we need store the customer details.create a customer table store of the data.
+
+> create table customer(customer_id int,first_name char(200),last_name char(200),date_of_birth date,address text,phone_number int);
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> desc customer;
++---------------+-----------+------+-----+---------+-------+
+| Field         | Type      | Null | Key | Default | Extra |
++---------------+-----------+------+-----+---------+-------+
+| customer_id   | int       | YES  |     | NULL    |       |
+| first_name    | char(200) | YES  |     | NULL    |       |
+| last_name     | char(200) | YES  |     | NULL    |       |
+| date_of_birth | date      | YES  |     | NULL    |       |
+| address       | text      | YES  |     | NULL    |       |
+| phone_number  | int       | YES  |     | NULL    |       |
++---------------+-----------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+

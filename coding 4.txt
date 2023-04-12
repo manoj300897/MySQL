@@ -1,0 +1,101 @@
+1.get all the details of products that belong to clothing category and 
+price less than 800
+
+select * from e_commerce where price<850;
++-------------+----------+-------+-------+--------+
+| name        | category | price | brand | rating |
++-------------+----------+-------+-------+--------+
+| blue jeans  | clothing |   800 | denim |    3.6 |
+| black jeans | clothing |   750 | denim |    4.5 |
++-------------+----------+-------+-------+--------+
+
+2.get all the details of products that belong to denim brand with rating 
+greater than 4.
+
+mysql> select * from e_commerce where rating>4.0;
++-------------+----------+-------+-------+--------+
+| name        | category | price | brand | rating |
++-------------+----------+-------+-------+--------+
+| blackshirt  | clothing |   900 | puma  |    4.8 |
+| black jeans | clothing |   750 | denim |    4.5 |
++-------------+----------+-------+-------+--------+
+
+3.get all the best rated products  with price <=1000.
+
+mysql> select * from e_commerce where price<=1000 and rating>4.0;
++--------------+----------+-------+-------------+--------+
+| name         | category | price | brand       | rating |
++--------------+----------+-------+-------------+--------+
+| blackshirt   | clothing |   900 | puma        |    4.8 |
+| black jeans  | clothing |   750 | denim       |    4.5 |
+| hoodies      | clothing |   760 | nike        |    4.1 |
+| casual shirt | clothing |   760 | louis philp |    4.4 |
+| white shirt  | clothing |   760 | polo        |    4.4 |
++--------------+----------+-------+-------------+--------+
+
+4.get all the products from the product table.
+
+mysql> select * from e_commerce where price<1000 and rating>3.6 and 
+brand='puma';
++------------+----------+-------+-------+--------+
+| name       | category | price | brand | rating |
++------------+----------+-------+-------+--------+
+| blackshirt | clothing |   900 | puma  |    4.8 |
+| jersy      | clothing |   750 | puma  |    3.8 |
++------------+----------+-------+-------+--------+
+
+5.) Get all the products from "puma", "Denim" or "Nike" brand.
+mysql> select * from e_commerce where Brand = 'Puma' or Brand = 'Denim' or Brand = 'Nike';
++-------------+----------+-------+-------+--------+
+| name        | category | price | brand | rating |
++-------------+----------+-------+-------+--------+
+| blackshirt  | clothing |   900 | puma  |    4.8 |
+| blue jeans  | clothing |   800 | denim |    3.6 |
+| black jeans | clothing |   750 | denim |    4.5 |
+| hoodies     | clothing |   760 | nike  |    4.1 |
+| jersy       | clothing |   750 | puma  |    3.8 |
++-------------+----------+-------+-------+--------+
+
+6 ) Get all the details of products whose
+	1) Brand is "Redmi" with rating greater than 4 or
+	2) products that belongs to "Oneplus" Brand.
+mysql> select * from products where (Brand = "Redmi" or Brand = "Oneplus") and Rating > 4.0;
++--------------+-------------+-------+---------+--------+
+| P_Name       | Catagory    | Price | Brand   | Rating |
++--------------+-------------+-------+---------+--------+
+| OnePlus Nord | Electronics | 50000 | OnePlus |    4.2 |
+| Nexa Oneplus | Electronics | 75000 | Oneplus |    4.5 |
++--------------+-------------+-------+---------+--------+
+7 ) Get only cakes from "Cadbury" and "Britaniya" Brands that have rating greater than 4.0;
+mysql> select * from products where P_Name like "%Cake" and (Brand = "Cadbury" or Brand = "Britaniya") and Rating > 4.0;
++-------------------+----------+-------+-----------+--------+
+| P_Name            | Catagory | Price | Brand     | Rating |
++-------------------+----------+-------+-----------+--------+
+| Black Forest Cake | Foods    |   500 | Cadbury   |    4.5 |
+| Red Welvet Cake   | Foods    |   800 | Cadbury   |    4.9 |
+| Red Welvet Cake   | Foods    |   750 | Britaniya |    4.2 |
+| Chocalote Cake    | Foods    |   399 | Britaniya |    4.1 |
++-------------------+----------+-------+-----------+--------+
+8 ) Get all the details of products whose
+1) Brand is "Puma" and rating greater than 3.5 or
+	2) Brand is "Denim" and rating greater than 4.0.
+mysql> select * from products where (Brand = "Puma" and Rating > 3.5)
+or (Brand = "Denim" and Rating > 4.0);
++-------------+----------+-------+-------+--------+
+| name        | category | price | brand | rating |
++-------------+----------+-------+-------+--------+
+| blackshirt  | clothing |   900 | puma  |    4.8 |
+| blue jeans  | clothing |   800 | denim |    3.6 |
+| black jeans | clothing |   750 | denim |    4.5 |
+
+9 ) Get all the shirts available in "puma", "Nike" or "Levis" Brands, excluding the black coloured shirts.
+
++-------------+----------+-------+-------+--------+
+| name        | category | price | brand | rating |
++-------------+----------+-------+-------+--------+
+| hoodies     | clothing |   760 | nike  |    4.1 |
+| jersy       | clothing |   750 | puma  |    3.8 |
+| Green Shirt  | Clothing |   450 | Levis |    4.6 |
+| casual shirt | clothing |   760 | puma |    4.4 |
++-------------+----------+-------+-------+--------+
+

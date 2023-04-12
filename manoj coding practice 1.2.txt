@@ -1,0 +1,133 @@
+1.A new player has joined the tournament.write an sql query to add follow.
+
+insert into player(name,age,score) values('Raj',26,120);
+Query OK, 1 row affected (0.45 sec)
+
+mysql> select * from player;
++------+------+-------+
+| name | age  | score |
++------+------+-------+
+| Raj  |   26 |   120 |
++------+------+-------+
+
+2.three new players have joined the tournament.
+
+mysql> insert into player (name,age,score) values('ram',28,125),('charan',25,173),('ravan',20,152);
+Query OK, 3 rows affected (0.08 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from player;
++--------+------+-------+
+| name   | age  | score |
++--------+------+-------+
+| ram    |   28 |   125 |
+| charan |   25 |   173 |
+| ravan  |   20 |   152 |
++--------+------+-------+
+
+3.get all the details of player table.
+select * from player;
++--------+------+-------+
+| name   | age  | score |
++--------+------+-------+
+| Raj    |   26 |   120 |
+| ram    |   28 |   125 |
+| charan |   25 |   173 |
+| ravan  |   20 |   152 |
++--------+------+-------+
+
+4.update player shyam age is 30.
+
+mysql> update player set age=30 where name='shyam';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 2  Changed: 1  Warnings: 0
+
+mysql> select * from player where score=100;
++-------+------+-------+
+| name  | age  | score |
++-------+------+-------+
+| shyam |   30 |   100 |
++-------+------+-------+
+
+5.delete from the player name david
+
+select * from player;
++--------+------+-------+
+| name   | age  | score |
++--------+------+-------+
+| Raj    |   26 |   120 |
+| ram    |   28 |   125 |
+| charan |   25 |   173 |
+| ravan  |   20 |   152 |
+| david  |   30 |   100 |     			//delete david
++--------+------+-------+
+mysql> delete from player where age=30;
+Query OK, 2 rows affected (0.03 sec)
+
+mysql> select * from player;
++--------+------+-------+
+| name   | age  | score |
++--------+------+-------+
+| Raj    |   26 |   120 |
+| ram    |   28 |   125 |
+| charan |   25 |   173 |
+| ravan  |   20 |   152 |
++--------+------+-------+
+
+6.we have to store strikerate in database.
+
+mysql> alter table player add strike_rate double(4,2);
+mysql> update player set strike_rate=score/3;
+Query OK, 4 rows affected (0.04 sec)
+Rows matched: 4  Changed: 4  Warnings: 0
+mysql> select * from player;
++--------+------+-------+-------------+
+| name   | age  | score | strike_rate |
++--------+------+-------+-------------+
+| Raj    |   26 |   120 |       40.00 |
+| ram    |   28 |   125 |       41.67 |
+| charan |   25 |   173 |       57.67 |
+| ravan  |   20 |   152 |       50.67 |
++--------+------+-------+-------------+
+
+7.get anme,age details of players.
+mysql> select name,age from player;
++--------+------+
+| name   | age  |
++--------+------+
+| Raj    |   26 |
+| ram    |   28 |
+| charan |   25 |
+| ravan  |   20 |
++--------+------+
+
+8.rename the column_name to full_name.
+
+mysql> alter table player change name full_name char(200);
+mysql> select * from player;
++-----------+------+-------+-------------+
+| full_name | age  | score | strike_rate |
++-----------+------+-------+-------------+
+| Raj       |   26 |   120 |       40.00 |
+| ram       |   28 |   125 |       41.67 |
+| charan    |   25 |   173 |       57.67 |
+| ravan     |   20 |   152 |       50.67 |
++-----------+------+-------+-------------+
+
+9.delete player table from database
+
+mysql> select * from player;
++-----------+------+-------+-------------+
+| full_name | age  | score | strike_rate |
++-----------+------+-------+-------------+
+| Raj       |   26 |   120 |       40.00 |
+| ram       |   28 |   125 |       41.67 |
+| charan    |   25 |   173 |       57.67 |
+| ravan     |   20 |   152 |       50.67 |
++-----------+------+-------+-------------+
+mysql> drop table player;
+Query OK, 0 rows affected (0.11 sec)
+mysql> select * from player;
+ERROR 1146 (42S02): Table 'manodb.player' doesn't exist
+
+

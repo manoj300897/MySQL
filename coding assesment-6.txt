@@ -1,0 +1,166 @@
+mysql> select * from emp;
++--------+-----------+-------------+---------+---------+------------+---------------+------------+------------+------------+
+| emp_id | emp_name  | designation | dept_no | salary  | new_salary | triple_salary | hire_date  | commission | dept_name  |
++--------+-----------+-------------+---------+---------+------------+---------------+------------+------------+------------+
+|   1001 | manoj     | clerk       |      10 | 4000.00 |    4500.00 |      12000.00 | 1981-08-30 |       1000 | production |
+|   1002 | vimal     | salesman    |      20 | 3000.00 |    3500.00 |       9000.00 | 1981-10-15 |        750 | quality    |
+|   1003 | arun      | clerk       |      30 | 2000.00 |    2500.00 |       6000.00 | 1985-10-20 |        500 | It         |
+|   1004 | haris     | salesman    |      20 | 4100.00 |    4500.00 |      12300.00 | 1990-05-25 |       1025 | quality    |
+|   1005 | suratayan | analyst     |      10 | 5000.00 |    5500.00 |      15000.00 | 1997-11-20 |       1250 | production |
+|   1006 | mandayan  | clerk       |      10 | 5500.00 |    6000.00 |      16500.00 | 1996-11-20 |       1375 | production |
+|   1007 | praksh    | clerk       |      10 | 5500.00 |    6000.00 |      16500.00 | 1990-11-20 |       1375 | production |
+|   1008 | santhosh  | clerk       |      10 | 5500.00 |    6000.00 |      16500.00 | 1990-06-20 |       1375 | production |
+|   1009 | sandy     | maintenance |      25 | 6000.00 |    6500.00 |      18000.00 | 1998-12-19 |       1500 | electrical |
+|   1010 | sachin    | manager     |      20 | 6000.00 |    6500.00 |      18000.00 | 1981-02-14 |       1500 | quality    |
+|   1011 | sam       | manager     |      10 | 7000.00 |    7500.00 |      21000.00 | 1982-02-14 |       1750 | production |
+|   1013 | madhu     | analyst     |      20 | 5000.00 |    5500.00 |      15000.00 | 1990-11-26 |       1100 | quality    |
+|   1014 | mani      | analyst     |      20 | 5000.00 |    5500.00 |      15000.00 | 1985-11-26 |       1250 | quality    |
++--------+-----------+-------------+---------+---------+------------+---------------+------------+------------+------------+
+
+mysql> select * from dept;
++---------+-----------+------------+
+| dept_no | dname     | location   |
++---------+-----------+------------+
+|      10 | accounts  | coimbatore |
+|      20 | sales     | tirupur    |
+|      20 | marketing | chennai    |
+|      10 | advertise | ooty       |
++---------+-----------+------------+
+Joins
+1. Write a query to display the name,job.salary department name and department number for all employees.
+mysql> SELECT e.emp_name, e.designation, e.salary, d.dname, d.dept_no from emp as e inner join dept as d on e.dept_no=d.dept_no;
++-----------+-------------+---------+-----------+---------+
+| emp_name  | designation | salary  | dname     | dept_no |
++-----------+-------------+---------+-----------+---------+
+| manoj     | clerk       | 4000.00 | advertise |      10 |
+| vimal     | salesman    | 3000.00 | sales     |      20 |
+| haris     | salesman    | 4100.00 | sales     |      20 |
+| suratayan | analyst     | 5000.00 | accounts  |      10 |
+| mandayan  | clerk       | 5500.00 | accounts  |      10 |
+| praksh    | clerk       | 5500.00 | accounts  |      10 |
+| santhosh  | clerk       | 5500.00 | accounts  |      10 |
+| sachin    | manager     | 6000.00 | sales     |      20 |
+| sam       | manager     | 7000.00 | advertise |      10 |
+| madhu     | analyst     | 5000.00 | marketing |      20 |
+| mani      | analyst     | 5000.00 | marketing |      20 |
++-----------+-------------+---------+-----------+---------+
+2. Display the jos available in DALLAS.
+mysql> select designation from emp inner join dept on emp.dept_no = dept.dep
+t_no where location = 'coimbatore';
++-------------+
+| designation |
++-------------+
+| clerk       |
+| analyst     |
+| clerk       |
+| clerk       |
+| clerk       |
+| manager     |
++-------------+
+3.Display the name,job,salary and the salary grade for each employee.
+mysql> select e.emp_name,e.designation,e.salary,s.grade from emp e inner joi
+n salgrade s on e.salary between s.lowsal and s.highsal;
++----------+-------------+---------+-------+
+| emp_name | designation | salary  | grade |
++----------+-------------+---------+-------+
+| vimal    | salesman    | 3000.00 |     3 
+| arun     | clerk       | 2000.00 |     3 |
++----------+-------------+---------+-------+
+4. Display the dept name and no. of employees working in each dept.
+mysql> select dept.dname, count(*) as emp_id from dept left join emp on dept.dept_no = emp.dept_no group by dept.dname;
++-----------+--------+
+| dname     | emp_id |
++-----------+--------+
+| accounts  |      6 |
+| sales     |      5 |
+| marketing |      5 |
+| advertise |      6 |
++-----------+--------+
+5. Display the empno,name,dept name,loc,grade of all employees.
+mysql> select e.emp_id, e.emp_name, d.dname, d.location, s.grade from emp e inner join dept d on e.dept_no = d.dept_no inner join salgrade s on e.salary between s.lowsal and s.highsal;
++--------+----------+-----------+----------+-------+
+| emp_id | emp_name | dname     | location | grade |
++--------+----------+-----------+----------+-------+
+|   1002 | vimal    | sales     | tirupur  |     3 |
+|   1002 | vimal    | marketing | chennai  |     3 |
++--------+----------+-----------+----------+-------+
+6. Display the empno,name,deptno and the dept name for all employees. Include the depts which is not having any employees.
+mysql>  SELECT emp.emp_id, emp.emp_name, emp.dept_no, dept.dname from emp  left join dept on emp.dept_no = dept.dept_no;
++--------+-----------+---------+-----------+
+| emp_id | emp_name  | dept_no | dname     |
++--------+-----------+---------+-----------+
+|   1001 | manoj     |      10 | advertise |
+|   1002 | vimal     |      20 | marketing |
+   1003 | arun      |      30 | NULL      |
+|   1004 | haris     |      20 | sales     |
+|   1005 | suratayan |      10 | accounts  |
+|   1006 | mandayan  |      10 | accounts  |
+|   1007 | praksh    |      10 | accounts  |
+|   1008 | santhosh  |      10 | accounts  |
+|   1009 | sandy     |      25 | NULL      |
+| 1010 | sachin    |      20 | sales     |
+|   1011 | sam       |      10 | advertise |
+|   1013 | madhu     |      20 | marketing |
+|   1014 | mani      |      20 | marketing |
++--------+-----------+---------+-----------+
+24 rows in set (0.00 sec)
+7. Display the deptno and dept name which is having no. employees.
+mysql> select emp.emp_id,emp.emp_name,emp.designation,emp.dept_no
+    -> dept.dname,dept.location
+    -> from emp right join dept on emp.dept_no = dept.dept_no
+    -> union
+    -> select emp.emp_id,emp.emp_name,emp.designation,emp.dept_no,dept.dname,dep
+t.loaction
+    -> from emp
+    -> left join dept on emp.dept_no = dept.dept_no where emp.emp_id is null;
++--------+------------+
+| deptno | dname      |
++--------+------------+
+|     10 | marketing |
++--------+------------+
+8. Display the employee name and their manager's name for all employees.
+mysql> SELECT e.ename, m.ename
+    -> FROM emp e
+    -> INNER JOIN emp m
+    -> ON m.empno = e.mgr;
++--------+-------+
+| ename  | ename |
++--------+-------+
+|manoj  | mani  |
+| ajay  | bijo |
+| varun   | manoj |
+| jagan  | jai |
+
+9. Display the dept name which is having maximum employees.
+
+mysql> SELECT dept.dname
+    -> FROM dept
+    -> INNER JOIN emp ON dept.dept_no = emp.dept_no
+    -> GROUP BY dept.dname
+    -> ORDER BY COUNT(emp.empno) DESC
+    -> LIMIT 1;
++-------+
+| dname |
++-------+
+| Sales |
++-------+
+10.Write a query to find the empno, ename, job, deptno, dname and loc of all the employees. Include the departments which is having no employees and the employees who had not been allocated any dept.
+mysql> SELECT e.emp_id, e.emp_name, e.designation, e.dept_no, d.dname, d.locatio
+n
+    -> from emp e left outer join dept d on e.dept_no =d.dept_no;
++--------+-----------+-------------+---------+-----------+------------+
+| emp_id | emp_name  | designation | dept_no | dname     | location   |
++--------+-----------+-------------+---------+-----------+------------+
+|   1001 | manoj     | clerk       |      10 | advertise | ooty       |
+|   1002 | vimal     | salesman    |      20 | marketing | chennai    |
+|   1003 | arun      | clerk       |      30 | NULL      | NULL       |
+|   1004 | haris     | salesman    |      20 | sales     | tirupur    |
+|   1005 | suratayan | analyst     |      10 | advertise | ooty       |
+|   1006 | mandayan  | clerk       |      10 | advertise | ooty       |
+|   1007 | praksh    | clerk       |      10 | accounts  | coimbatore |
+|   1008 | santhosh  | clerk       |      10 | accounts  | coimbatore |
+|   1010 | sachin    | manager     |      20 | sales     | tirupur    |
+|   1011 | sam       | manager     |      10 | accounts  | coimbatore |
+|   1013 | madhu     | analyst     |      20 | sales     | tirupur    |
+|   1014 | mani      | analyst     |      20 | sales     | tirupur    |
++--------+-----------+-------------+---------+-----------+------------+

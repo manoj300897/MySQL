@@ -1,0 +1,114 @@
+1) Consider the following relations for a boat management application for a beach resort:
+
+Choose appropriate foreign keys and other constraints
+
+SAILOR (SID,NAME,DOB,GENDER)
+
+* name column must have a value
+
+BOAT (BID,BTYPE,BNAME,COLOR)
+
+** Boat name must be unique
+
+BTYPE can take two values (D, S)
+
+D (Deluxe) S (Super Deluxe)
+
+SAILS (SID, BID, DOT, SHIFT)
+
+DOT (Date of Trip)
+
+SHIFT can take two values (FN or AN)
+
+
+Insert records into the above tables. 
+
+		SAILOR:
+mysql> CREATE TABLE sailor (sid int NOT NULL PRIMARY KEY,name varchar(20),dob date,gender varchar(10));
+Query OK, 0 rows affected (0.07 sec)
+mysql> desc sailor;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| sid    | int         | NO   | PRI | NULL    |       |
+| name   | varchar(20) | YES  |     | NULL    |       |
+| dob    | date        | YES  |     | NULL    |       |
+| gender | varchar(10) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+mysql> INSERT INTO sailor values(101,'manoj','1997-08-30','Male');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> INSERT INTO sailor values(102,'madhu','1995-03-15','Female');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO sailor values(103,'kani','1992-05-20','Female');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO sailor values(104,'vimal','1994-04-25','Male');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO sailor values(105,'hasini','1994-010-25','Female');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> SELECT * FROM sailor;
++-----+--------+------------+--------+
+| sid | name   | dob        | gender |
++-----+--------+------------+--------+
+| 101 | manoj  | 1997-08-30 | Male   |
+| 102 | madhu  | 1995-03-15 | Female |
+| 103 | kani   | 1992-05-20 | Female |
+| 104 | vimal  | 1994-04-25 | Male   |
+| 105 | hasini | 1994-10-25 | Female |
++-----+--------+------------+--------+
+
+			BOAT:
+mysql> CREATE TABLE boat (bid int NOT NULL PRIMARY KEY,btype varchar(20) UNIQUE,bname varchar(20),color varchar(20));
+Query OK, 0 rows affected (0.20 sec)
+mysql> desc boat;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| bid   | int         | NO   | PRI | NULL    |       |
+| btype | varchar(20) | YES  | UNI | NULL    |       |
+| bname | varchar(20) | YES  |     | NULL    |       |
+| color | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+mysql> INSERT INTO boat VALUES (106,'flat','speed','blue');
+Query OK, 1 row affected (0.06 sec)
+mysql> INSERT INTO boat VALUES (107,'long','raid','white');
+mysql> desc boat;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| bid   | int         | NO   | PRI | NULL    |       |
+| btype | varchar(20) | YES  | UNI | NULL    |       |
+| bname | varchar(20) | YES  |     | NULL    |       |
+| color | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+mysql> SELECT * FROM boat;
++-----+-------+-------+-------+
+| bid | btype | bname | color |
++-----+-------+-------+-------+
+| 106 | flat  | speed | blue  |
+| 107 | long  | raid  | white |
++-----+-------+-------+-------+
+
+			SAILS:
+mysql> CREATE TABLE sails (sid int,bid int,dot date,shift int,
+FOREIGN KEY(sid) REFERENCES sailor(sid),FOREIGN KEY(bid) 
+REFERENCES boat(bid));
+mysql> INSERT INTO sails VALUES (101,106,'1999-08-30','1');
+Query OK, 1 row affected (0.04 sec)
+mysql> INSERT INTO sails VALUES (102,107,'2000-10-25','2');
+Query OK, 1 row affected (0.04 sec)
+mysql> INSERT INTO sails VALUES (104,107,'1999-10-20','1');
+mysql> SELECT * FROM sails;
++------+------+------------+-------+
+| sid  | bid  | dot        | shift |
++------+------+------------+-------+
+|  101 |  106 | 1999-08-30 |     1 |
+|  102 |  107 | 2000-10-25 |     2 |
+|  104 |  107 | 1999-10-20 |     1 |
++------+------+------------+-------+
+
+

@@ -1,0 +1,20 @@
+1. Write a query to display the name,job.salary department name and department number for all employees.
+
+2. Display the jobs available in DALLAS.
+
+3.Display the name,job,salary and the salary grade for each employee.
+
+4. Display the dept name and no. of employees working in each dept.
+
+5. Display the empno,name,dept name,loc,grade of all employees.
+
+6. Display the empno,name,deptno and the dept name for all employees. Include the depts which is not having any employees.
+
+7. Display the deptno and dept name which is having no. employees.
+
+8. Display the employee name and their manager's name for all employees.
+
+9. Display the dept name which is having maximum employees.
+
+10.Write a query to find the empno, ename, job, deptno, dname and loc of all the employees. Include the departments which is having no employees and the employees who had not been allocated any dept.
+

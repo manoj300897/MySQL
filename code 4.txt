@@ -1,0 +1,37 @@
+SELECT COUNT(*) FROM emp;
+
+SELECT SUM(sal), SUM(comm) FROM emp;
+
+SELECT MAX(sal) FROM emp;
+
+SELECT MIN(hiredate) FROM emp;
+
+SELECT AVG(sal) FROM emp;
+
+SELECT MAX(sal) FROM emp WHERE job = 'CLERK';
+
+SELECT MAX(sal) FROM emp WHERE deptno = 20;
+
+SELECT MIN(sal) FROM emp WHERE job = 'SALESMAN';
+
+SELECT AVG(sal) FROM emp WHERE job = 'MANAGER';
+
+SELECT SUM(sal) FROM emp WHERE job = 'ANALYST' AND deptno = 20;
+
+SELECT deptno, COUNT(*) FROM emp GROUP BY deptno;
+
+SELECT job, COUNT(*) FROM emp GROUP BY job;
+
+SELECT deptno, SUM(sal) FROM emp GROUP BY deptno;
+
+SELECT deptno, MAX(sal) FROM emp GROUP BY deptno;
+
+SELECT job, SUM(sal) FROM emp GROUP BY job;
+
+SELECT job, MIN(sal) FROM emp GROUP BY job;
+
+SELECT deptno, COUNT() FROM emp GROUP BY deptno HAVING COUNT() > 3;
+
+SELECT job, SUM(sal) FROM emp GROUP BY job HAVING SUM(sal) > 2500;
+
+SELECT job, COUNT() FROM emp GROUP BY job HAVING COUNT() > 3;

@@ -1,0 +1,38 @@
+ Constraints:
+
+SAILOR:
+
+Primary key: SID
+Name column must have a value (NOT NULL)
+BOAT:
+
+Primary key: BID
+Boat name must be unique (UNIQUE)
+Foreign key: BTYPE references BOAT_TYPE
+BOAT_TYPE:
+
+Primary key: BTYPE
+BTYPE can take two values (D, S)
+SAILS:
+
+Primary key: SID, BID, DOT, SHIFT
+Foreign key: SID references SAILOR
+Foreign key: BID references BOAT
+SHIFT can take two values (FN or AN)
+Insert statements:
+
+ 
+INSERT INTO SAILOR (SID, NAME, DOB, GENDER) VALUES (2, 'Emily Brown', '1995-08-22', 'F');
+INSERT INTO SAILOR (SID, NAME, DOB, GENDER) VALUES (3, 'Michael Johnson', '1988-03-10', 'M');
+
+INSERT INTO BOAT_TYPE (BTYPE) VALUES ('D');
+INSERT INTO BOAT_TYPE (BTYPE) VALUES ('S');
+
+INSERT INTO BOAT (BID, BTYPE, BNAME, COLOR) VALUES (1, 'D', 'Deluxe Boat', 'Blue');
+INSERT INTO BOAT (BID, BTYPE, BNAME, COLOR) VALUES (2, 'S', 'Super Deluxe Boat', 'Red');
+INSERT INTO BOAT (BID, BTYPE, BNAME, COLOR) VALUES (3, 'S', 'Another Super Deluxe Boat', 'Green');
+
+INSERT INTO SAILS (SID, BID, DOT, SHIFT) VALUES (1, 1, '2022-06-15', 'FN');
+INSERT INTO SAILS (SID, BID, DOT, SHIFT) VALUES (2, 1, '2022-06-15', 'FN');
+INSERT INTO SAILS (SID, BID, DOT, SHIFT) VALUES (1, 2, '2022-06-16', 'AN');
+INSERT INTO SAILS (SID, BID, DOT, SHIFT) VALUES (3, 3, '2022-06-17', 'FN');

@@ -1,0 +1,88 @@
+1.create a student table  to store name,age and score of students.
+ 
+> create table students(name varchar(200),age int,score int);
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> desc students;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| name  | varchar(200) | YES  |     | NULL    |       |
+| age   | int          | YES  |     | NULL    |       |
+| score | int          | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+
+
+2.we need store the customer details.create a customer table store of the data.
+
+> create table customer(customer_id int,first_name char(200),last_name char(200),date_of_birth date,address text,phone_number int);
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> desc customer;
++---------------+-----------+------+-----+---------+-------+
+| Field         | Type      | Null | Key | Default | Extra |
++---------------+-----------+------+-----+---------+-------+
+| customer_id   | int       | YES  |     | NULL    |       |
+| first_name    | char(200) | YES  |     | NULL    |       |
+| last_name     | char(200) | YES  |     | NULL    |       |
+| date_of_birth | date      | YES  |     | NULL    |       |
+| address       | text      | YES  |     | NULL    |       |
+| phone_number  | int       | YES  |     | NULL    |       |
++---------------+-----------+------+-----+---------+-------+
+
+3.we need to store the details of order in e-commerce application.create an order_details.
+
+>create table order_details(order_id int,customer_id int,order_datetime datetime,
+    -> shipped_datetime datetime,total_amount float);
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> desc order_details;
++------------------+----------+------+-----+---------+-------+
+| Field            | Type     | Null | Key | Default | Extra |
++------------------+----------+------+-----+---------+-------+
+| order_id         | int      | YES  |     | NULL    |       |
+| customer_id      | int      | YES  |     | NULL    |       |
+| order_datetime   | datetime | YES  |     | NULL    |       |
+| shipped_datetime | datetime | YES  |     | NULL    |       |
+| total_amount     | float    | YES  |     | NULL    |       |
++------------------+----------+------+-----+---------+-------+
+
+
+4.we're storing the details of players who are a part of a tournament.the db
+contains a player table that stores the name,age and score of players.
+
+
+mysql> insert into students(name,age,score) values('ram',28,30);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select * from students;
++------+------+-------+
+| name | age  | score |
++------+------+-------+
+| ram  |   28 |    30 |
++------+------+-------+
+
+
+5.the db contains a player table that stores the name,age and score of players.
+
+ mysql> insert into player(name,age,score) values('suresh',21,70),('venkat',21,43);
+Query OK, 2 rows affected (0.04 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+mysql> select * from player;
++--------+------+-------+
+| name   | age  | score |
++--------+------+-------+
+| suresh |   21 |    70 |
+| venkat |   21 |    43 |
++--------+------+-------+
+
+6.get all the details of suresh from the player tablein the following format.
+
+ select * from player where name='suresh';
++--------+------+-------+
+| name   | age  | score |
++--------+------+-------+
+| suresh |   21 |    70 |
++--------+------+-------+
+
+

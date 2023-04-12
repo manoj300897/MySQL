@@ -1,0 +1,58 @@
+SELECT e.name, e.job, e.salary, d.dname, d.deptno
+FROM employee e
+INNER JOIN department d ON e.deptno = d.deptno;
+
+SELECT job
+FROM employee
+INNER JOIN department ON employee.deptno = department.deptno
+WHERE location = 'DALLAS';
+
+SELECT e.name, e.job, e.salary, s.grade
+FROM employee e
+INNER JOIN salgrade s ON e.salary BETWEEN s.losal AND s.hisal;
+
+SELECT department.dname, COUNT(*) as num_employees
+FROM department
+LEFT JOIN employee ON department.deptno = employee.deptno
+GROUP BY department.dname;
+
+SELECT employee.empno, employee.name, department.dname, department.location, salgrade.grade
+FROM employee
+LEFT JOIN department ON employee.deptno = department.deptno
+LEFT JOIN salgrade ON employee.salary BETWEEN salgrade.losal AND salgrade.hisal;
+
+SELECT employee.empno, employee.name, department.deptno, department.dname
+FROM employee
+RIGHT JOIN department ON employee.deptno = department.deptno
+UNION
+SELECT employee.empno, employee.name, department.deptno, department.dname
+FROM employee
+LEFT JOIN department ON employee.deptno = department.deptno
+WHERE employee.empno IS NULL;
+
+SELECT department.deptno, department.dname
+FROM department
+LEFT JOIN employee ON department.deptno = employee.deptno
+WHERE employee.empno IS NULL;
+
+SELECT e.name AS employee_name, m.name AS manager_name
+FROM employee e
+INNER JOIN employee m ON e.mgr = m.empno;
+
+SELECT department.dname
+FROM department
+LEFT JOIN employee ON department.deptno = employee.deptno
+GROUP BY department.dname
+ORDER BY COUNT(*) DESC
+LIMIT 1;
+
+SELECT employee.empno, employee.name, employee.job, employee.deptno, department.dname, department.location
+FROM employee
+RIGHT JOIN department ON employee.deptno = department.deptno
+UNION
+SELECT employee.empno, employee.name, employee.job, employee.deptno, department.dname, department.location
+FROM employee
+LEFT JOIN department ON employee.deptno = department.deptno
+WHERE employee.empno IS NULL;
+
+

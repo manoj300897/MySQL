@@ -1,0 +1,48 @@
+mongo db queries.
+show dbs
+use emp
+
+emp> db.createCollection("emp_details")
+------------------------------------------------------------------
+emp> db.emp_details.insertOne(
+... { "emp_id":1001,
+...   "emp_name":"manoj",
+...   "salary":15000.00,
+...   "role":"plumber"
+... })
+------------------------------------------------------------------
+emp> db.emp_details.find().pretty()
+[
+  {
+    _id: ObjectId("63fb04461d738aecb29f62d9"),
+    emp_id: 1001,
+    emp_name: 'manoj',
+    salary: 15000,
+    role: 'plumber'
+  }
+]
+----------------------------------------------------------------------
+// Connect to a MongoDB database
+mongo <mongodb://host:port/database>
+
+// Find all documents in a collection
+db.collection.find()
+
+// Find documents that match a specific condition
+db.collection.find({ field: value })
+
+// Find documents and limit the results
+db.collection.find().limit(10)
+
+// Find documents and sort the results
+db.collection.find().sort({ field: 1 })
+
+// Insert a document into a collection
+db.collection.insertOne({ field: value })
+
+// Update a document in a collection
+db.collection.updateOne({ field: value }, { $set: { newField: newValue } })
+
+// Delete a document from a collection
+db.collection.deleteOne({ field: value })
+------------------------------------------------------------------------------------

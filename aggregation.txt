@@ -1,0 +1,22 @@
+SELECT * FROM employees WHERE hire_date < '1980-06-30' OR hire_date > '1980-12-31';
+SELECT USER();
+SELECT * FROM employees WHERE (dept_no = 10 OR dept_no = 20) AND (job_title = 'Clerk' OR job_title = 'Salesman' OR job_title = 'Analyst');
+SELECT * FROM employees WHERE name LIKE 'S%';
+SELECT * FROM employees WHERE name LIKE '%N';
+SELECT * FROM employees WHERE name LIKE '_A%';
+SHOW TABLES;
+SELECT DISTINCT job_title FROM employees;
+SELECT * FROM employees WHERE job_title NOT IN ('Salesman', 'Clerk', 'Analyst');
+SELECT name, salary FROM employees ORDER BY salary DESC;
+SELECT name, job_title, salary, salary*1.15 AS "New Salary" FROM employees;
+SELECT * FROM employees WHERE name LIKE '%LL%';
+SELECT * FROM employees WHERE name LIKE '___A%';
+SELECT name, job_title, salary FROM employees WHERE salary NOT BETWEEN 2000 AND 3000;
+SELECT emp_no, job_title, hire_date FROM employees WHERE manager_no IS NULL;
+SELECT name, hire_date FROM employees WHERE hire_date BETWEEN '1981-01-01' AND '1981-12-31';
+SELECT name, hire_date FROM employees WHERE hire_date BETWEEN '1981-01-01' AND '1981-06-30';
+SELECT CONCAT(name, ' earns ', salary, ' but wants three times salary') AS output FROM employees;
+SELECT * FROM employees WHERE hire_date LIKE '1981-05-%';
+(Output can be shown in commandline by running the above query and then typing '\G' at the end)
+
+
